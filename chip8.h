@@ -13,6 +13,6 @@ uint8_t stack_pointer{};
 uint8_t delay_timer{};
 uint8_t sound_timer{};
 uint8_t keys[16]{};
-uint32_t video_output[2048]{};
+uint32_t video_output[32][64]{};
 uint16_t opcode{};
 };
