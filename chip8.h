@@ -39,3 +39,6 @@ std::expected<void, std::string> loadROM (const std::string &filename);
 
 
 //prob want a constructor to intialize the rom and one for the fonts or one that does all (decide which)
+chip8::chip8 () {
+    program_counter = memory_start_address;
+}
