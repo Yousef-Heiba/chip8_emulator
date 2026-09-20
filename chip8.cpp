@@ -32,6 +32,11 @@ void chip8::opcode_00E0() {
     video_output = {};
 }
 
+void chip8::opcode_00EE() {
+    stack_pointer--;
+    program_counter = stack[stack_pointer];
+}
+
 void chip8::opcode_1NNN() {
     program_counter = opcode & 0x0FFFu;
 }

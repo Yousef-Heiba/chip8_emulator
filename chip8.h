@@ -59,6 +59,7 @@ std::array<std::array<uint32_t, 64>, 32> video_output{};
 uint16_t opcode{};
 
 void opcode_00E0();
+void opcode_00EE();
 void opcode_1NNN();
 
 };
