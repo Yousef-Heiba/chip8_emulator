@@ -1,5 +1,15 @@
 #include <chip8.h>
 
+chip8::chip8 ()
+    : randGen(std::random_device{}()),
+      randByte(0, 255)
+{
+    program_counter = memory_start_address;
+    for (uint8_t i{}; i < font.size(); ++i) {
+        ram[font_start_address + i] = font[i];
+    }
+}
+
 std::expected<void, std::string> chip8::loadROM (const std::string &filename) {
     std::ifstream file(filename, std::ios::binary);
     if (!file) {
@@ -16,4 +26,12 @@ std::expected<void, std::string> chip8::loadROM (const std::string &filename) {
         }
     }
     return {};
+}
+
+void chip8::opcode_00E0() {
+    video_output = {};
+}
+
+void chip8::opcode_1NNN() {
+    program_counter = opcode & 0x0FFFu;
 }
