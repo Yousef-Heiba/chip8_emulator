@@ -6,6 +6,7 @@
 #include <expected>
 #include <array>
 #include <random>
+#include <cassert>
 
 class chip8 {
 public:
@@ -58,9 +59,12 @@ std::array<std::array<uint32_t, 64>, 32> video_output{};
 
 uint16_t opcode{};
 
+void cycle();
+
 void opcode_00E0();
 void opcode_00EE();
 void opcode_1NNN();
+void opcode_2NNN();
 
 };
 
