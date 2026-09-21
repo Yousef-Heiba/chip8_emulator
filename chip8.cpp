@@ -32,6 +32,8 @@ void chip8::cycle() {
     assert pc + 1 >= ram.size();
     opcode = ((memory[pc] << 8) | memory[pc+1]); 
     pc += 2;
+
+
 }
 
 void chip8::opcode_00E0() {
@@ -51,4 +53,10 @@ void chip8::opcode_2NNN() {
     stack[stack_pointer] = pc;
     stack_pointer++;   
     pc = opcode & 0X0FFFu; 
+}
+
+void chip8::opcode_3XKK() {
+    if (registers[(opcode & 0x0F00u) >> 8] == (opcode & 0x00FFu)) {
+        program_counter += 2;
+    }
 }

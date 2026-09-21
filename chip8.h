@@ -65,7 +65,7 @@ void opcode_00E0();
 void opcode_00EE();
 void opcode_1NNN();
 void opcode_2NNN();
-void opcode_3XNN();
+void opcode_3XKK();
 
 };
 
