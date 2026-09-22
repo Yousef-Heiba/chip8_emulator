@@ -60,3 +60,9 @@ void chip8::opcode_3XKK() {
         program_counter += 2;
     }
 }
+
+void chip8::opcode_4XKK() {
+    if (registers[(opcode & 0x0F00u) >> 8] != (opcode & 00FFu)) {
+        program_counter += 2;
+    }
+}
