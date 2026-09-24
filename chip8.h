@@ -69,6 +69,7 @@ void opcode_3XKK();
 void opcode_4XKK();
 void opcode_5XY0();
 void opcode_6XKK();
+void opcode_7XKK();
 
 };
 
