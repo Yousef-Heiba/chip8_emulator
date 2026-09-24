@@ -74,5 +74,25 @@ void chip8::opcode_5XY0() {
 }
 
 void chip8::opcode_6XKK() {
-    
+    registers[(opcode & 0x0F00u) >> 8u] = (opcode & 0x00FFu);
+}
+
+void chip8::opcode_7XKK() {
+    registers[(opcode & 0x0F00u) >> 8u] += (opcode & 0x00FFu);
+}
+
+void chip8::opcode_8XY0() {
+    registers[(opcode & 0x0F00u) >> 8u] = registers[(opcode & 0x00F0u) >> 4u];
+}
+
+void chip8::opcode_8XY1() {
+    registers[(opcode & 0x0F00u) >> 8u] |= registers[(opcode & 0x00F0u) >> 4u];
+}
+
+void chip8::opcode_8XY2() {
+    registers[(opcode & 0x0F00u) >> 8u] &= registers[(opcode & 0x00F0u) >> 4u];
+}
+
+void chip8::opcode_8XY3() {
+    registers[(opcode & 0x0F00u) >> 8u] ^= registers[(opcode & 0x00F0u) >> 4u];
 }

@@ -70,6 +70,11 @@ void opcode_4XKK();
 void opcode_5XY0();
 void opcode_6XKK();
 void opcode_7XKK();
+void opcode_8XY0();
+void opcode_8XY1();
+void opcode_8XY2();
+void opcode_8XY3();
+void opcode_8XY4();
 
 };
 
