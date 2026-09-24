@@ -72,3 +72,7 @@ void chip8::opcode_5XY0() {
         program_counter += 2;
     }
 }
+
+void chip8::opcode_6XKK() {
+    
+}
