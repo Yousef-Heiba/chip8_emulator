@@ -66,3 +66,9 @@ void chip8::opcode_4XKK() {
         program_counter += 2;
     }
 }
+
+void chip8::opcode_5XY0() {
+    if (registers[(opcode & 0x0F00u) >> 8] == registers[(opcode & 0x00F0u) >> 4]) {
+        program_counter += 2;
+    }
+}
