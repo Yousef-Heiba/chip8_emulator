@@ -97,6 +97,3 @@ void opcode_FX55();
 void opcode_FX65();
 
 };
-
-
-//prob want a constructor to intialize the rom and one for the fonts or one that does all (decide which)
