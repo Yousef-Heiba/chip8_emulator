@@ -136,5 +136,29 @@ void chip8::opcode_8XY7() {
 }
 
 void chip8::opcode_8XYE() {
-    
+    if (((registers[(opcode & 0x0F00u) >> 8] & 0b10000000u) >> 7) == 1) {
+        registers[15] = 1;
+    } else { 
+        registers[15] = 0;
+    }
+
+    registers[(opcode & 0x0F00u) >> 8] <<= 1;
+}
+
+void chip8::opcode_9XY0() {
+    if (registers[(opcode & 0x0F00u) >> 8] != registers[(opcode & 0x00F0u) >> 4]) {
+        program_counter += 2;
+    }  
+}
+
+void chip8::opcode_ANNN() {
+    index_register = opcode & 0x0FFFu;
+}
+
+void chip8::opcode_BNNN() {
+    program_counter = (opcode & 0x0FFFu) + (registers[0]);
+}
+
+void chip8::opcode_CXKK() {
+    registers[(opcode & 0x0F00u) >> 8] = static_cast<uint8_t>(randByte(randGen)) & (opcode & 0x00FFu);
 }
