@@ -77,6 +77,8 @@ void opcode_8XY3();
 void opcode_8XY4();
 void opcode_8XY5();
 void opcode_8XY6();
+void opcode_8XY7();
+void opcode_8XYE(); 
 
 };
 

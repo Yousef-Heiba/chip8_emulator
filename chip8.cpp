@@ -124,3 +124,17 @@ void chip8::opcode_8XY6() {
 
     registers[(opcode & 0x0F00u) >> 8] >>= 1; 
 }
+
+void chip8::opcode_8XY7() {
+    if ((registers[(opcode & 0x00F0u) >> 4]) >= (registers[(opcode & 0x0F00u) >> 8])) {
+        registers[15] = 1;
+    } else {
+        registers [15] = 0;
+    }
+
+    registers[(opcode & 0x0F00u) >> 8] = registers[(opcode & 0x00F0u) >> 4] - registers[(opcode & 0x0F00u) >> 8];
+}
+
+void chip8::opcode_8XYE() {
+    
+}
