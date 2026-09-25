@@ -78,7 +78,23 @@ void opcode_8XY4();
 void opcode_8XY5();
 void opcode_8XY6();
 void opcode_8XY7();
-void opcode_8XYE(); 
+void opcode_8XYE();
+void opcode_9XY0();
+void opcode_ANNN();
+void opcode_BNNN();
+void opcode_CXKK();
+void opcode_DXYN();
+void opcode_EX9E();
+void opcode_EXA1();
+void opcode_FX07();
+void opcode_FX0A();
+void opcode_FX15();
+void opcode_FX18();
+void opcode_FX1E();
+void opcode_FX29();
+void opcode_FX33();
+void opcode_FX55();
+void opcode_FX65();
 
 };
 
