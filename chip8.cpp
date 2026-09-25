@@ -96,3 +96,12 @@ void chip8::opcode_8XY2() {
 void chip8::opcode_8XY3() {
     registers[(opcode & 0x0F00u) >> 8u] ^= registers[(opcode & 0x00F0u) >> 4u];
 }
+
+void chip8::opcode_8XY4() {
+    if ((registers[(opcode & 0x0F00u) >> 8u] + registers[(opcode & 0x00F0u) >> 4u]) > 0xFFu) {
+        registers[15] = 1; 
+    } else {
+        registers[15] = 0;
+    }
+    registers[(opcode & 0x0F00u) >> 8u] += registers[(opcode & 0x00F0u) >> 4u];
+}
