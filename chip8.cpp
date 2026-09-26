@@ -160,3 +160,9 @@ void chip8::opcode_BNNN() {
 void chip8::opcode_CXKK() {
     registers[(opcode & 0x0F00u) >> 8] = static_cast<uint8_t>(randByte(randGen)) & (opcode & 0x00FFu);
 }
+
+void chip8::opcode_DXYN()  {
+    uint8_t x = registers[(opcode & 0x0F00u) >> 8];
+    uint8_t y = registers[(opcode & 0x00F0u) >> 4];
+
+}
