@@ -29,11 +29,9 @@ std::expected<void, std::string> chip8::loadROM (const std::string &filename) {
 }
 
 void chip8::cycle() {
-    assert pc + 1 >= ram.size();
-    opcode = ((memory[pc] << 8) | memory[pc+1]); 
-    pc += 2;
-
-
+    assert (program_counter + 1 >= ram.size());
+    opcode = ((ram[program_counter] << 8) | ram[program_counter+1]); 
+    program_counter += 2;
 }
 
 void chip8::opcode_00E0() {
@@ -50,9 +48,9 @@ void chip8::opcode_1NNN() {
 }
 
 void chip8::opcode_2NNN() {
-    stack[stack_pointer] = pc;
+    stack[stack_pointer] = program_counter;
     stack_pointer++;   
-    pc = opcode & 0X0FFFu; 
+    program_counter = opcode & 0X0FFFu; 
 }
 
 void chip8::opcode_3XKK() {
@@ -62,7 +60,7 @@ void chip8::opcode_3XKK() {
 }
 
 void chip8::opcode_4XKK() {
-    if (registers[(opcode & 0x0F00u) >> 8] != (opcode & 00FFu)) {
+    if (registers[(opcode & 0x0F00u) >> 8] != (opcode & 0x00FFu)) {
         program_counter += 2;
     }
 }
