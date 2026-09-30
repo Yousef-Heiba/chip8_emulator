@@ -166,3 +166,7 @@ void chip8::opcode_DXYN()  {
     uint8_t y = registers[(opcode & 0x00F0u) >> 4];
 
 }
+
+void chip8::opcode_EX9E() {
+    
+}
