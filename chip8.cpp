@@ -164,6 +164,11 @@ void chip8::opcode_CXKK() {
 void chip8::opcode_DXYN()  {
     uint8_t x = registers[(opcode & 0x0F00u) >> 8];
     uint8_t y = registers[(opcode & 0x00F0u) >> 4];
+    uint8_t n = opcode & 0x000Fu
+
+    
+
+
 
 }
 
