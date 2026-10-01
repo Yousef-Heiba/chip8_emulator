@@ -164,14 +164,17 @@ void chip8::opcode_CXKK() {
 
 //TO-DO: Right now there is no need to optimize since this is O(8n) = o(n), but n is at most a 4 bit number (15)
 // so worst case is 15 * 8 (2nd loop always runs 8 times) = 120, implement bit packing for fun
+
+//todo: make x,y wrap around instead of causing segmentation fault
 void chip8::opcode_DXYN()  {
     uint8_t x = registers[(opcode & 0x0F00u) >> 8];
     uint8_t y = registers[(opcode & 0x00F0u) >> 4];
     uint8_t n = opcode & 0x000Fu;
     registers[15] = 0;
     assert ((x + 7) < 64);
-    assert ((y + n - 1) < 32)
-
+    if (n != 0) {
+        assert ((y + n - 1) < 32);
+    }
     for (int i{0}; i < n; ++i) {
         uint8_t sprite = ram[index_register + i]; 
         for (int j{0}; j < 8; j++) {
@@ -180,8 +183,7 @@ void chip8::opcode_DXYN()  {
                     registers[15] = 1;
                 } 
                 video_output[y + i][x + j] ^= 0xFFFFFFFFu;
-            };
-            
+            }
         }
     }
 }
