@@ -189,5 +189,8 @@ void chip8::opcode_DXYN()  {
 }
 
 void chip8::opcode_EX9E() {
-    
+    uint8_t key = registers[(opcode & 0x0F00u) >> 8]; 
+    if (keys[key]) {
+        program_counter += 2;
+    }
 }
