@@ -197,5 +197,35 @@ void chip8::opcode_EX9E() {
 }
 
 void chip8::opcode_EXA1() {
-    
+    uint8_t key = registers[(opcode & 0x0F00u) >> 8]; 
+    assert(key <= 15);
+    if (!keys[key]) {
+        program_counter += 2;
+    }  
+}
+
+void chip8::opcode_FX07() {
+    registers[(opcode & 0X0F00u) >> 8] = delay_timer;
+}
+
+void chip8::opcode_FX0A() {
+    for (int i{0}; i < keys.size(); ++i) {
+        if(keys[i]) {
+            registers[(opcode & 0X0F00u) >> 8] = i;
+            return;
+        }
+    }
+    program_counter -= 2;
+}
+
+void chip8::opcode_FX15() {
+    delay_timer = registers[(opcode & 0x0F00u) >> 8];
+}
+
+void chip8::opcode_FX18() {
+    sound_timer = registers[(opcode & 0x0F00u) >> 8];
+}
+
+void chip8::opcode_FX1E() {
+
 }
