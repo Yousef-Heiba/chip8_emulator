@@ -227,5 +227,17 @@ void chip8::opcode_FX18() {
 }
 
 void chip8::opcode_FX1E() {
+    index_register += registers[(opcode & 0x0F00u) >> 8];
+}
 
+void chip8::opcode_FX29() {
+    uint16_t Vx = registers[(opcode & 0x0F00u) >> 8];
+    index_register = 0x50 + ((Vx & 0x0Fu) * 5);
+}
+
+void chip8::opcode_FX33() {
+    uint16_t temp_number = registers[(opcode & 0x0F00u) >> 8];
+    ram[index_register] = temp_number / 100;
+    ram[index_register + 1] = (temp_number / 10) % 10;
+    ram[index_register + 2] = temp_number % 10; 
 }
