@@ -195,3 +195,7 @@ void chip8::opcode_EX9E() {
         program_counter += 2;
     }
 }
+
+void chip8::opcode_EXA1() {
+    
+}
