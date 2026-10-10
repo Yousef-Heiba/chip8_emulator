@@ -241,3 +241,9 @@ void chip8::opcode_FX33() {
     ram[index_register + 1] = (temp_number / 10) % 10;
     ram[index_register + 2] = temp_number % 10; 
 }
+
+void chip8::opcode_FX55() {
+    for (int i{}; i < 15; ++i) {
+        
+    }
+}
