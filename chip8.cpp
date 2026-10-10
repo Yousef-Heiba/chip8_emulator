@@ -243,7 +243,13 @@ void chip8::opcode_FX33() {
 }
 
 void chip8::opcode_FX55() {
-    for (int i{}; i < 15; ++i) {
-        
+    for (int i{}; i <= ((opcode & 0x0F00u) >> 8); ++i) {
+        ram[index_register + i] = registers[i];
+    }
+}
+
+void chip8::opcode_FX65() {
+    for (int i{}; i <= ((opcode & 0x0F00u) >> 8); ++i) {
+        registers[i] = ram[index_register + i];
     }
 }
