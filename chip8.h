@@ -95,40 +95,16 @@ void opcode_FX29();
 void opcode_FX33();
 void opcode_FX55();
 void opcode_FX65();
+void opcode_NULL();
+void Table0();
+void Table8();
+void TableE();
+void TableF();
 
-void (chip8::*opcodeDecoder[35])() = {
-    opcode_00E0,
-    opcode_00EE,
-    opcode_1NNN,
-    opcode_2NNN,
-    opcode_3XKK,
-    opcode_4XKK,
-    opcode_5XY0,
-    opcode_6XKK,
-    opcode_7XKK,
-    opcode_8XY0,
-    opcode_8XY1,
-    opcode_8XY2,
-    opcode_8XY3,
-    opcode_8XY5,
-    opcode_8XY6,
-    opcode_8XY7,
-    opcode_8XYE,
-    opcode_9XY0,
-    opcode_ANNN,
-    opcode_BNNN,
-    opcode_CXKK,
-    opcode_DXYN,
-    opcode_EX9E,
-    opcode_EXA1,
-    opcode_FX07,
-    opcode_FX0A,
-    opcode_FX15,
-    opcode_FX18,
-    opcode_FX1E,
-    opcode_FX29,
-    opcode_FX33,
-    opcode_FX55,
-    opcode_FX65,
-};
+std::array<void (chip8::*)(), 0x10> table;
+std::array<void (chip8::*)(), 0x0F> table0;
+std::array<void (chip8::*)(), 0x0F> table8;
+std::array<void (chip8::*)(), 0x0F> tableE;
+std::array<void (chip8::*)(), 0x66> tableF;
+
 };

@@ -1,13 +1,68 @@
 #include <chip8.h>
 
-chip8::chip8 ()
+chip8::chip8()
     : randGen(std::random_device{}()),
       randByte(0, 255)
 {
     program_counter = memory_start_address;
-    for (uint8_t i{}; i < font.size(); ++i) {
+    for (uint8_t i{}; i < font.size(); ++i)
+    {
         ram[font_start_address + i] = font[i];
     }
+
+    table.fill(&chip8::opcode_NULL);
+    table0.fill(&chip8::opcode_NULL);
+    table8.fill(&chip8::opcode_NULL);
+    tableE.fill(&chip8::opcode_NULL);
+    tableF.fill(&chip8::opcode_NULL);
+    
+    // Primary table
+    table[0x0] = &chip8::Table0;
+    table[0x1] = &chip8::opcode_1NNN;
+    table[0x2] = &chip8::opcode_2NNN;
+    table[0x3] = &chip8::opcode_3XKK;
+    table[0x4] = &chip8::opcode_4XKK;
+    table[0x5] = &chip8::opcode_5XY0;
+    table[0x6] = &chip8::opcode_6XKK;
+    table[0x7] = &chip8::opcode_7XKK;
+    table[0x8] = &chip8::Table8;
+    table[0x9] = &chip8::opcode_9XY0;
+    table[0xA] = &chip8::opcode_ANNN;
+    table[0xB] = &chip8::opcode_BNNN;
+    table[0xC] = &chip8::opcode_CXKK;
+    table[0xD] = &chip8::opcode_DXYN;
+    table[0xE] = &chip8::TableE;
+    table[0xF] = &chip8::TableF;
+
+    // Secondary table 0
+    table0[0x0] = &chip8::opcode_00E0;
+    table0[0xE] = &chip8::opcode_00EE;
+
+    // Secondary table 8
+    table8[0x0] = &chip8::opcode_8XY0;
+    table8[0x1] = &chip8::opcode_8XY1;
+    table8[0x2] = &chip8::opcode_8XY2;
+    table8[0x3] = &chip8::opcode_8XY3;
+    table8[0x4] = &chip8::opcode_8XY4;
+    table8[0x5] = &chip8::opcode_8XY5;
+    table8[0x6] = &chip8::opcode_8XY6;
+    table8[0x7] = &chip8::opcode_8XY7;
+    table8[0xE] = &chip8::opcode_8XYE;
+
+    // Secondary table E
+    tableE[0x1] = &chip8::opcode_EXA1;
+    tableE[0xE] = &chip8::opcode_EX9E;
+
+    // Secondary table F
+    tableF[0x07] = &chip8::opcode_FX07;
+    tableF[0x0A] = &chip8::opcode_FX0A;
+    tableF[0x15] = &chip8::opcode_FX15;
+    tableF[0x18] = &chip8::opcode_FX18;
+    tableF[0x1E] = &chip8::opcode_FX1E;
+    tableF[0x29] = &chip8::opcode_FX29;
+    tableF[0x33] = &chip8::opcode_FX33;
+    tableF[0x55] = &chip8::opcode_FX55;
+    tableF[0x65] = &chip8::opcode_FX65;
 }
 
 std::expected<void, std::string> chip8::loadROM (const std::string &filename) {
