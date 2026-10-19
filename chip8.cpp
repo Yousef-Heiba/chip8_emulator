@@ -1,4 +1,4 @@
-#include <chip8.h>
+#include "chip8.h"
 
 chip8::chip8()
     : randGen(std::random_device{}()),
