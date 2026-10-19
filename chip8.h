@@ -10,8 +10,8 @@
 
 class chip8 {
 public:
-chip8() = default;
-~chip8() = default;
+chip8();
+~chip8();
 
 std::expected<void, std::string> loadROM (const std::string &filename);
 

@@ -84,9 +84,21 @@ std::expected<void, std::string> chip8::loadROM (const std::string &filename) {
 }
 
 void chip8::cycle() {
-    assert (program_counter + 1 >= ram.size());
-    opcode = ((ram[program_counter] << 8) | ram[program_counter+1]); 
+    // Fetch the next two-byte instruction.
+    assert (program_counter + 1u < ram.size());
+    opcode = (ram[program_counter] << 8u) | ram[program_counter + 1];
     program_counter += 2;
+
+    // Decode and execute using the instruction's highest nibble.
+    (this->*table[(opcode & 0xF000u) >> 12u])();
+
+    if (delay_timer > 0) {
+        --delay_timer;
+    }
+
+    if (sound_timer > 0) {
+        --sound_timer;
+    }
 }
 
 void chip8::opcode_00E0() {
