@@ -6,14 +6,22 @@
 #include <expected>
 #include <array>
 #include <random>
-#include <cassert>
+#include <chrono>
+#include <cstddef>
+#include <stdexcept>
 
 class chip8 {
 public:
 chip8();
-~chip8();
+~chip8() = default;
 
 std::expected<void, std::string> loadROM (const std::string &filename);
+void cycle();
+// Also call this when the host pauses instruction execution.
+void updateTimers();
+void setKey(uint8_t key, bool pressed);
+const std::array<std::array<uint32_t, 64>, 32>& getVideoOutput() const;
+bool isSoundActive() const;
 
 private:
 
@@ -34,6 +42,8 @@ uint8_t stack_pointer{};
 
 uint8_t delay_timer{};
 uint8_t sound_timer{};
+std::chrono::steady_clock::time_point last_timer_update{std::chrono::steady_clock::now()};
+std::chrono::duration<double> timer_elapsed{};
 
 std::array<uint8_t, 16> keys{};
 std::array<uint8_t, 80> font{
@@ -59,7 +69,7 @@ std::array<std::array<uint32_t, 64>, 32> video_output{};
 
 uint16_t opcode{};
 
-void cycle();
+void checkMemoryRange(uint16_t address, std::size_t count) const;
 
 void opcode_00E0();
 void opcode_00EE();
