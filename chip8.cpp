@@ -212,6 +212,9 @@ void chip8::opcode_4XKK() {
 }
 
 void chip8::opcode_5XY0() {
+    if ((opcode & 0x000Fu) != 0) {
+        throw std::runtime_error("Invalid opcode: 5XY0 requires a zero final nibble.");
+    }
     if (registers[(opcode & 0x0F00u) >> 8] == registers[(opcode & 0x00F0u) >> 4]) {
         program_counter += 2;
     }
@@ -284,6 +287,9 @@ void chip8::opcode_8XYE() {
 }
 
 void chip8::opcode_9XY0() {
+    if ((opcode & 0x000Fu) != 0) {
+        throw std::runtime_error("Invalid opcode: 9XY0 requires a zero final nibble.");
+    }
     if (registers[(opcode & 0x0F00u) >> 8] != registers[(opcode & 0x00F0u) >> 4]) {
         program_counter += 2;
     }  
